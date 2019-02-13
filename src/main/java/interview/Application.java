@@ -10,7 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 public class Application {
@@ -24,7 +27,11 @@ public class Application {
     public CommandLineRunner loadData(AttributeRepository attributeRepository, OptionRepository optionRepository) {
         return args -> {
             //we could use projections to create custom views
-            List<Attribute> attributes = CustomCsvReader.read("src/resources/attributes.csv", Attribute.class);
+            List<Attribute> attributes = new ArrayList<>();
+            File attributesFile = new File("src/resources/attributes.csv");
+            for (Map attributeEntry : CustomCsvReader.read(attributesFile)){
+                attributes.add(new Attribute(attributeEntry));
+            }
             List<Option> options = CustomCsvReader.read("src/resources/options.csv", Option.class);
             attributeRepository.saveAll(attributes);
             optionRepository.saveAll(options);

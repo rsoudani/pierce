@@ -15,7 +15,7 @@ apply plugin: 'io.spring.dependency-management'
 
 bootJar {
     baseName = 'gs-rest-service'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
 
 repositories {
@@ -29,10 +29,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
-    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.9.8'
-
-    compileOnly 'org.projectlombok:lombok:1.18.4'
     compile("com.h2database:h2")
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.9.8'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')
 }
